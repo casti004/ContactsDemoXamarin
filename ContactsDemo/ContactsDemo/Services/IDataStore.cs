@@ -9,8 +9,8 @@ namespace ContactsDemo.Services
         Task<bool> AddContactAsync(T contact);
         Task<bool> DeleteContactAsync(T contact);
         Task<bool> UpdateContactAsync(T contact);
-        Task<bool> DeleteContactAsync(string id);
-        Task<T> GetContactAsync(string id);
+        Task<bool> DeleteContactAsync(int id);
+        Task<T> GetContactAsync(int id);
         Task<IEnumerable<T>> GetContactsAsync(bool forceRefresh = false);
     }
 }

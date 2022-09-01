@@ -5,18 +5,21 @@
              Title="{Binding Title}">
     
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Update" Clicked="Update_Clicked" />
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
     
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="First Name:" FontSize="Medium" />
-        <Label Text="{Binding Contact.FirstName}" FontSize="Small"/>
-        <Label Text="Last Name:" FontSize="Medium" />
-        <Label Text="{Binding Contact.LastName}" FontSize="Small"/>
-        <Label Text="Email:" FontSize="Medium" />
-        <Label Text="{Binding Contact.Email}" FontSize="Small"/>
-        <Label Text="Phone:" FontSize="Medium" />
-        <Label Text="{Binding Contact.Phone}" FontSize="Small"/>
-    </StackLayout>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="First Name" FontSize="Medium" />
+            <Entry Text="{Binding Contact.FirstName}" FontSize="Small" />
+            <Label Text="Last Name" FontSize="Medium" />
+            <Entry Text="{Binding Contact.LastName}" FontSize="Small" />
+            <Label Text="Email" FontSize="Medium" />
+            <Editor Text="{Binding Contact.Email}" FontSize="Small" Margin="0" />
+            <Label Text="Phone" FontSize="Medium" />
+            <Editor Text="{Binding Contact.Phone}" FontSize="Small" Margin="0" />
+        </StackLayout>
+    </ContentPage.Content>
     
 </ContentPage>

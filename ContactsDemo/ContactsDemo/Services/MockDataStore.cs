@@ -15,10 +15,10 @@ namespace ContactsDemo.Services
             contacts = new List<Contact>();
             var mockContacts = new List<Contact>
             {
-                new Contact { Id = Guid.NewGuid().ToString(), FirstName="Bill", LastName="Gates", Email="bill.gates@microsoft.com", Phone="8581234567" },
-                new Contact { Id = Guid.NewGuid().ToString(), FirstName="Steve", LastName="Jobs", Email="steve.jobs@apple.com", Phone="8589876541"},
-                new Contact { Id = Guid.NewGuid().ToString(), FirstName="Jeff", LastName="Besos", Email="jeff.besos@amazon.com", Phone="8584445566"},
-                new Contact { Id = Guid.NewGuid().ToString(), FirstName="Larry", LastName="Ellison", Email="larry.ellison@oracle.com", Phone="8587778899"}
+                new Contact { Id = 1, FirstName="Bill", LastName="Gates", Email="bill.gates@microsoft.com", Phone="8581234567" },
+                new Contact { Id = 2, FirstName="Steve", LastName="Jobs", Email="steve.jobs@apple.com", Phone="8589876541"},
+                new Contact { Id = 3, FirstName="Jeff", LastName="Besos", Email="jeff.besos@amazon.com", Phone="8584445566"},
+                new Contact { Id = 4, FirstName="Larry", LastName="Ellison", Email="larry.ellison@oracle.com", Phone="8587778899"}
             };
 
             foreach (var contact in mockContacts)
@@ -50,7 +50,7 @@ namespace ContactsDemo.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteContactAsync(string id)
+        public async Task<bool> DeleteContactAsync(int id)
         {
             var oldContact = contacts.Where((Contact arg) => arg.Id == id).FirstOrDefault();
             contacts.Remove(oldContact);
@@ -58,7 +58,7 @@ namespace ContactsDemo.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Contact> GetContactAsync(string id)
+        public async Task<Contact> GetContactAsync(int id)
         {
             return await Task.FromResult(contacts.FirstOrDefault(s => s.Id == id));
         }

@@ -39,10 +39,16 @@ namespace ContactsDemo.Views
             BindingContext = viewModel;
         }
 
+        async void Update_Clicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, "UpdateContact", viewModel);
+            await Navigation.PopAsync();
+        }
+
         async void Delete_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "DeleteContact", viewModel);
-            await Navigation.PopToRootAsync();
+            await Navigation.PopAsync();
         }
     }
 }

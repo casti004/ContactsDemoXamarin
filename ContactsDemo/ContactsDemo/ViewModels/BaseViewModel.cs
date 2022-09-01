@@ -7,12 +7,14 @@ using Xamarin.Forms;
 
 using ContactsDemo.Models;
 using ContactsDemo.Services;
+using System.IO;
 
 namespace ContactsDemo.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Contact> DataStore => DependencyService.Get<IDataStore<Contact>>() ?? new MockDataStore();
+        public IDbStore<Contact> DataStore => DependencyService.Get<IDbStore<Contact>>() ?? 
+            new DbStore(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "contacts.db"));
 
         bool isBusy = false;
         public bool IsBusy

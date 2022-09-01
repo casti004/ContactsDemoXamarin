@@ -21,12 +21,6 @@ namespace ContactsDemo.ViewModels
             Contacts = new ObservableCollection<Contact>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<App, string>(this, "Alert", async (App arg1, string arg2) =>
-            {
-                Debug.Write(arg2);
-            });
-
-
             MessagingCenter.Subscribe<NewContactPage, Contact>(this, "AddContact", async (obj, contact) =>
             {
                 var newContact = contact as Contact;
@@ -47,15 +41,32 @@ namespace ContactsDemo.ViewModels
                 }
 
             });
+
+            MessagingCenter.Subscribe<ContactDetailPage, ContactDetailViewModel>(this, "UpdateContact", async (obj, Contact) =>
+            {
+                var updateContact = Contact as ContactDetailViewModel;
+
+                var itemToUpdate = Contacts.Contains(updateContact.Contact);
+
+                if (itemToUpdate)
+                {
+                    Contacts.Remove(updateContact.Contact);
+                    await DataStore.UpdateContactAsync(updateContact.Contact);
+
+                    var contactToAdd = new Contact();
+                    contactToAdd.Email = updateContact.Contact.Email;
+                    contactToAdd.FirstName = updateContact.Contact.FirstName;
+                    contactToAdd.LastName = updateContact.Contact.LastName;
+                    contactToAdd.Phone = updateContact.Contact.Phone;
+
+                    Contacts.Add(contactToAdd);
+                }
+
+            });
         }
 
         async Task ExecuteLoadItemsCommand()
         {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-
             try
             {
                 Contacts.Clear();
